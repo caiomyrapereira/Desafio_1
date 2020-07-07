@@ -7,11 +7,34 @@
     <title>Teste 1</title>
 </head>
 <body>
-    <input type="text" id="input" placeholder="Name">
-    <ul  id="list">
-        
-    </ul>
-    <p>Nome selecionado:</p>
+
+    <div id="app">
+        <input 
+         type="text" 
+         id="input" 
+         placeholder="Name"
+         v-model="fullName"
+        >
+
+        <ul  id="list">
+            <li 
+             v-for="(item,index) in clients"
+             v-if=" filterClient(item)"
+            >
+                <a href="#" v-on:click="selectClient(index)" > 
+                   {{ item.name }}  
+                </a>
+            </li>
+        </ul>
+
+        <p id="info" >
+            Nome selecionado: 
+            <b> 
+                {{ message }}
+            </b>
+        </p>
+    </div>
+
     <script src="./main.js"></script>
 </body>
 </html>
