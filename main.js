@@ -67,7 +67,7 @@
             ],
             
             fullName:'',
-            message:'',
+            message:''
         },
 
         methods:{
@@ -80,9 +80,9 @@
                 return newString;
             },
             selectClient(index){
-                this.message = this.clients[index].name+' - '+this.clients[index].telefone;
+                this.$set(this,'message',this.clients[index].name+' - '+this.clients[index].telefone);
             }
-        },      
+        }
     });
 
 
