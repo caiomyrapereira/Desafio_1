@@ -73,7 +73,7 @@
         methods:{
             filterClient(elem){
                 const regex = RegExp('^'+this.removeSpace(this.fullName),'gim');
-                return regex.test(elem.name) && this.removeSpace(this.fullName);     
+                return regex.test(elem.name);     
             },
             removeSpace(string){
                 const newString = string.replace(/\s{2,}/g, ' ').trim();
