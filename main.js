@@ -1,9 +1,10 @@
 (function Main(){
-    var clients = [];
+  
 
-    async function FetchCliente()
-    {
-        clients = [
+   const Input = new Vue({
+       el:'#app',
+       data:{
+         clients:[
             {
                 name: "Kauan Pereira Rocha",
                 telefone: "(81) 9479-5548"
@@ -64,31 +65,54 @@
                 name: "Livia Silva Ribeiro",
                 telefone: "(47) 4241-8712"
             }
-        ]
-    }
+        ],
+        clientfullName:'',
+        message:''
 
-    function Update()
-    {
-        var $list = document.getElementById('list');
-        var aux = "";
-        for(var i = 0; i < clients.length; i++)
-        {
-            aux += `<li>${clients[i].name}</li>`;
+       },
+       methods: {
+        filterClient(client){
+            const regex = RegExp('^'+this.removeSpace(this.clientfullName),'gim');
+            return regex.test(client.name);     
+        },
+        removeSpace(string){
+            const newString = string.replace(/\s{2,}/g, ' ').trim();
+            return newString;
+        },    
+        selectClient(index){
+            this.message = this.clients[index].name+' - '+this.clients[index].telefone;
         }
-        $list.innerHTML = aux;
-    }
+       },
+       template:`
+        <div>
+            <input 
+             type="text" 
+             id="input" 
+             placeholder="Name"
+             v-model="clientfullName"
+            >
+            <ul  id="list" >
+                <li 
+                 v-for="(client, index) in clients"
+                 v-if="filterClient(client)"
+                >
+                    <a 
+                     @click="selectClient(index)" 
+                     href="#"
+                    >
+                        {{client.name}}
+                    </a>
+                </li>
+            </ul>
+            <p>
+                Nome selecionado:
+                <b>{{message}}</b>
+            </p>
+           
+        </div>
+       `
 
-    async function Start()
-    {
-        await FetchCliente();
-        Update();
-    }
-
-    Start();
-
-
-    window.Main = {
-
-    }
+   })
+  
 
 })();
