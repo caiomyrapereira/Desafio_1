@@ -85,20 +85,21 @@
        },
        template:`
         <div>
+        
             <filterClient
              v-model="clientfullName" 
-            >
-            </filterClient>
+            />
+            
             <listUser 
              v-bind:clients="clients"
              v-bind:selectClient="selectClient"
              v-bind:filterClient="filterClient"
-            >
-           </listUser>
+            />
+          
            <message
             v-bind:message="message"
-           >
-           </message>
+           />
+
         </div>
        `
 
