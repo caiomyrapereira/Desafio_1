@@ -1,7 +1,7 @@
 (function Main(){
   
 
-   const Input = new Vue({
+   const App = new Vue({
        el:'#app',
        data:{
          clients:[
@@ -79,36 +79,26 @@
             const newString = string.replace(/\s{2,}/g, ' ').trim();
             return newString;
         },    
-        selectClient(index){
-            this.message = this.clients[index].name+' - '+this.clients[index].telefone;
+        selectClient(client){
+            this.message = client.name+' - '+client.telefone;
         }
        },
        template:`
         <div>
-            <input 
-             type="text" 
-             id="input" 
-             placeholder="Name"
-             v-model="clientfullName"
+            <filterClient
+             v-model="clientfullName" 
             >
-            <ul  id="list" >
-                <li 
-                 v-for="(client, index) in clients"
-                 v-if="filterClient(client)"
-                >
-                    <a 
-                     @click="selectClient(index)" 
-                     href="#"
-                    >
-                        {{client.name}}
-                    </a>
-                </li>
-            </ul>
-            <p>
-                Nome selecionado:
-                <b>{{message}}</b>
-            </p>
-           
+            </filterClient>
+            <listUser 
+             v-bind:clients="clients"
+             v-bind:selectClient="selectClient"
+             v-bind:filterClient="filterClient"
+            >
+           </listUser>
+           <message
+            v-bind:message="message"
+           >
+           </message>
         </div>
        `
 
